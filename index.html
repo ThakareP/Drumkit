@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title> Drum Kit</title>
+  <link rel="stylesheet" href="Styles.css">
+</head>
+
+<body>
+
+  <h2> A DRUM KIT</h2>
+  <div class="set">
+  <div class="keys">
+    <div data-key="65" class="key">   
+      <kbd>A</kbd>
+      <span class="sound">tom</span>
+    </div>
+
+    <div data-key="80" class="key">   
+      <kbd>P</kbd>
+      <span class="sound">hihat</span>
+    </div>
+
+    <div data-key="75" class="key">  
+      <kbd>K</kbd>
+      <span class="sound">ride</span>
+    </div>
+
+    <div data-key="70" class="key">   
+      <kbd>F</kbd>
+      <span class="sound">openhat</span>
+    </div>
+
+    <div data-key="66" class="key">    
+      <kbd>B</kbd>
+      <span class="sound">boom</span>
+    </div>
+
+    <div data-key="72" class="key">  
+      <kbd>H</kbd>
+      <span class="sound">tom3</span>
+    </div>
+    
+    <div data-key="84" class="key"> 
+      <kbd>T</kbd>
+      <span class="sound">tom1</span>
+    </div>
+
+  </div>
+
+  <audio data-key="65" src="tom.wav"></audio>
+  <audio data-key="80" src="hihat.wav"></audio>
+  <audio data-key="75" src="ride.wav"></audio>
+  <audio data-key="70" src="openhat.wav"></audio>
+  <audio data-key="66" src="boom.wav"></audio>
+  <audio data-key="72" src="tom-3.mp3"></audio>
+  <audio data-key="84" src="tom-1.mp3"></audio>
+
+</div>
+<script>
+  //event keydown and call sound
+  var keys = Array.from(document.querySelectorAll(".key")); 
+  keys.forEach(key =>window.addEventListener("keydown",playsound));
+  
+
+  function playsound(s){
+// checking if pressed key has audio or not
+    const audio = document.querySelector(`audio[data-key="${s.keyCode}"]`);
+    const key = document.querySelector(`div[data-key="${s.keyCode}"]`);
+    //checking keycode is same as pressed key's data key
+
+    if(!audio) // if audio is not present, functioning will stop there.
+    return;
+
+
+    key.classList.add('playing');  //after pressing keyboardinput it'll outlined pressed letter(change in css property)
+    audio.currentTime = 0;  //if someone presses key again then it'll start from top.(0sec)
+    audio.play(); // it'll play the attached sound to that key.
+
+
+  }
+  
+  
+    
+
+</script>
+</body>
+</html>
